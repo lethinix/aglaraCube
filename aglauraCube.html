@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spinning Cube with Images</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000000;
+      perspective: 1000px;
+      color:rgb(236, 239, 240);
+      top: 200px;
+      opacity: 0.7;
+    }
+
+    .cube {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: spin 6s infinite linear;
+    }
+
+    .container{
+        display: flex;
+        align-items: center;
+        gap: 200px;
+    }
+
+    .face {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #fff;
+      opacity: 0.9;
+    }
+
+    .front  { transform: rotateY(0deg) translateZ(100px); }
+    .back   { transform: rotateY(180deg) translateZ(100px); }
+    .right  { transform: rotateY(90deg) translateZ(100px); }
+    .left   { transform: rotateY(-90deg) translateZ(100px); }
+    .top    { transform: rotateX(90deg) translateZ(100px); }
+    .bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+    @keyframes spin {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+    <h1>
+        aglaura
+    </h1>
+  <div class="cube">
+    <div class="face front" style="background-image: url('assets/blurryPPL.jpg');"></div>
+    <div class="face back" style="background-image: url('assets/cgiCity.jpg');"></div>
+    <div class="face right" style="background-image: url('assets/cgiForest.jpg');"></div>
+    <div class="face left" style="background-image: url('assets/cropCircle.jpg');"></div>
+    <div class="face top" style="background-image: url('assets/disCity2.jpg');"></div>
+    <div class="face bottom" style="background-image: url('assets/disCity3.jpg');"></div>
+  </div>
+</div>
+
+  <script>
+    const faces = document.querySelectorAll('.face');
+    const images = [
+      'assets/blurryPPL.jpg',
+      'assets/cgiCity.jpg',
+      'assets/cgiForest.jpg',
+      'assets/cropCircle.jpg',
+      'assets/disCity2.jpg',
+      'assets/disCity3.jpg',
+      'assets/disCity4.jpg',
+      'assets/disCity5.jpg',
+      'assets/disCity6.jpg',
+      'assets/foggyPeople.jpg',
+      'assets/disCity4.jpg',
+    ];
+
+    let currentImageIndex = 0;
+
+    function changeImages() {
+      faces.forEach((face, index) => {
+        const nextImageIndex = (currentImageIndex + index) % images.length;
+        face.style.backgroundImage = `url('${images[nextImageIndex]}')`;
+      });
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+    }
+
+    setInterval(changeImages, 2000); // Change images every 2 seconds
+  </script>
+</body>
+</html>
