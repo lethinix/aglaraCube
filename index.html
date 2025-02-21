@@ -15,7 +15,7 @@
       perspective: 1000px;
       /* color:rgb(70, 111, 125); */
       color:#fff;
-      opacity: 0.8;
+      opacity: 0.7;
       background-image: url("assets/aglauraBg2.png");
       background-size: cover;
       background-position: 0px;
@@ -63,28 +63,28 @@
 <body>
 <div class="container">
     <h1>
-        aglaura
+        2024 photos
     </h1>
   <div class="cube">
-    <div class="face front" style="background-image: url('assets/blurryPPL.jpg');"></div>
-    <div class="face back" style="background-image: url('assets/cgiCity.jpg');"></div>
-    <div class="face right" style="background-image: url('assets/cgiForest.jpg');"></div>
-    <div class="face left" style="background-image: url('assets/cropCircle.jpg');"></div>
-    <div class="face top" style="background-image: url('assets/disCity2.jpg');"></div>
-    <div class="face bottom" style="background-image: url('assets/disCity3.jpg');"></div>
+    <div class="face front" style="background-image: url('assets/aruba-sky.JPG');"></div>
+    <div class="face back" style="background-image: url('assets/france-3-mountains.jpg');"></div>
+    <div class="face right" style="background-image: url('assets/france-butterflies.jpg');"></div>
+    <div class="face left" style="background-image: url('assets/france-flag.jpg');"></div>
+    <div class="face top" style="background-image: url('assets/france-flower-field.jpg');"></div>
+    <div class="face bottom" style="background-image: url('assets/france-forest.jpg');"></div>
   </div>
 </div>
 
   <script>
     const faces = document.querySelectorAll('.face');
     const images = [
-      'assets/blurryPPL.jpg',
-      'assets/cgiCity.jpg',
-      'assets/cgiForest.jpg',
-      'assets/cropCircle.jpg',
-      'assets/disCity2.jpg',
-      'assets/disCity3.jpg',
-      'assets/disCity4.jpg',
+      'assets/aruba-sky.JPG',
+      'assets/france-3-mountains.jpg',
+      'assets/france-buttierflies.jpg',
+      'assets/france-flag.jpg',
+      'assets/france-flower-field.jpg',
+      'assets/france-forest.jpg',
+      'assets/france-hikers.jpg',
       'assets/disCity5.jpg',
       'assets/disCity6.jpg',
       'assets/foggyPeople.jpg',
@@ -97,6 +97,8 @@
     ];
 
     let currentImageIndex = 0;
+    let grainIntensity = 0; // Intensity of the grain effect
+    let isTransitioning = false; // Flag to check if transitioning
 
     function changeImages() {
       faces.forEach((face, index) => {
@@ -105,6 +107,49 @@
       });
       currentImageIndex = (currentImageIndex + 1) % images.length;
     }
+
+
+
+
+    
+    if (isTransitioning) {
+    applyGrainEffect(grainIntensity);
+    grainIntensity += 1; // Increase grain intensity
+    if (grainIntensity > 255) {
+      // Switch to the next image
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      grainIntensity = 0; // Reset grain intensity
+      isTransitioning = false; // End transition
+    }
+  }
+
+  // Start transition every 3 seconds
+  if (frameCount % 180 === 0) {
+    isTransitioning = true;
+  }
+}
+
+function applyGrainEffect(intensity) {
+  loadPixels();
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      let index = (x + y * width) * 4;
+      let grain = random(-intensity, intensity); // Random grain value
+      pixels[index] += grain; // Red channel
+      pixels[index + 1] += grain; // Green channel
+      pixels[index + 2] += grain; // Blue channel
+    }
+  }
+  updatePixels();
+
+
+
+
+
+
+
+
+
 
     setInterval(changeImages, 2000); // Change images every 2 seconds
   </script>
