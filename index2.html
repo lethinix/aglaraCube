@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spinning Cube with Grainy Transition</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      background-image: url("assets/aglauraBg2.png");
+      background-size: cover;
+      background-position: 0px;
+      font-size: 20px;
+      color: #fff;
+      opacity: 0.6;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 200px;
+    }
+
+    .cube {
+      width: 300px;
+      height: 300px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: spin 10s infinite linear;
+    }
+
+    .face {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      /* border: 2px solid #fff; */
+      transition: background-image 0.8s ease-in-out;
+    }
+
+    /* Positioning cube faces */
+    .front  { transform: rotateY(0deg) translateZ(150px); }
+    .back   { transform: rotateY(180deg) translateZ(150px); }
+    .right  { transform: rotateY(90deg) translateZ(150px); }
+    .left   { transform: rotateY(-90deg) translateZ(150px); }
+    .top    { transform: rotateX(90deg) translateZ(150px); }
+    .bottom { transform: rotateX(-90deg) translateZ(150px); }
+
+    /* Cube spinning animation */
+    @keyframes spin {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    /* Grain overlay */
+    .grain-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image: url("assets/grain.png"); /* Replace with actual grain texture */
+      opacity: 0;
+      pointer-events: none; /* Prevents it from interfering with interactions */
+      mix-blend-mode: overlay; /* Makes grain blend properly */
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .grain-active {
+      opacity: 0.6; /* Adjust intensity of grain effect */
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>aglaura</h1>
+    <div class="cube">
+      <div class="face front"></div>
+      <div class="face back"></div>
+      <div class="face right"></div>
+      <div class="face left"></div>
+      <div class="face top"></div>
+      <div class="face bottom"></div>
+      <div class="grain-overlay"></div> <!-- Grain layer inside the cube -->
+    </div>
+  </div>
+
+  <script>
+    const faces = document.querySelectorAll('.face');
+    const grainOverlay = document.querySelector('.grain-overlay');
+    
+    const images = [
+      'assets/blurryPPL.jpg',
+      'assets/cgiCity.jpg',
+      'assets/cgiForest.jpg',
+      'assets/cropCircle.jpg',
+      'assets/disCity2.jpg',
+      'assets/disCity3.jpg',
+      'assets/disCity4.jpg',
+      'assets/disCity5.jpg',
+      'assets/disCity6.jpg',
+      'assets/foggyPeople.jpg',
+      'assets/moth.jpg',
+      'assets/nature.jpg',
+      'assets/person.jpg',
+      'assets/sittingWhere.jpg',
+      'assets/shaddow.jpg',
+      'assets/personWater.jpg'
+    ];
+
+    let currentImageIndex = 0;
+
+    function changeImages() {
+      grainOverlay.classList.add('grain-active'); // Add grain effect
+
+      setTimeout(() => {
+        faces.forEach((face, index) => {
+          const nextImageIndex = (currentImageIndex + index) % images.length;
+          face.style.backgroundImage = `url('${images[nextImageIndex]}')`;
+        });
+
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        
+        setTimeout(() => {
+          grainOverlay.classList.remove('grain-active'); // Remove grain effect after transition
+        }, 600);
+      }, 200); 
+    }
+
+    setInterval(changeImages, 3000); // Change images every 3 seconds
+  </script>
+</body>
+</html>
