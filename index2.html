@@ -11,19 +11,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-
-      background-color: #000000;
-      perspective: 1000px;
-      /* color:rgb(70, 111, 125); */
-      color:#fff;
-      opacity: 0.7;
+      background-color: #000;
       background-image: url("assets/aglauraBg2.png");
       background-size: cover;
       background-position: 0px;
       font-size: 20px;
       color: #fff;
       opacity: 0.6;
-      perspective: 1000px;
     }
 
     .container {
@@ -37,7 +31,7 @@
       height: 300px;
       position: relative;
       transform-style: preserve-3d;
-      animation: spin 8s infinite linear;
+      animation: spin 10s infinite linear;
     }
 
     .face {
@@ -47,7 +41,7 @@
       background-size: cover;
       background-position: center;
       /* border: 2px solid #fff; */
-     transition: background-image 0.4s ease-in-out;
+      transition: background-image 0.8s ease-in-out;
     }
 
     /* Positioning cube faces */
@@ -75,18 +69,18 @@
       opacity: 0;
       pointer-events: none; /* Prevents it from interfering with interactions */
       mix-blend-mode: overlay; /* Makes grain blend properly */
-      /* transition: opacity 0.5s ease-in-out; */
-      
+      transition: opacity 0.5s ease-in-out;
     }
 
     .grain-active {
       opacity: 0.6; /* Adjust intensity of grain effect */
     }
+
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>film . 2024</h1>
+    <h1>aglaura</h1>
     <div class="cube">
       <div class="face front"></div>
       <div class="face back"></div>
@@ -103,56 +97,25 @@
     const grainOverlay = document.querySelector('.grain-overlay');
     
     const images = [
-      'assets/aruba-sky.JPG',
-      'assets/france-3-mountains.jpg',
-      'assets/france-butterflies.jpg',
-      'assets/france-flag.jpg',
-      'assets/france-flower-field.jpg',
-      'assets/france-forest.jpg',
-      'assets/france-hikers.jpg',
-      'assets/france-kendall.jpg',
-      'assets/france-mountain-split.jpg',
-      'assets/france-mountain-up.jpg',
-      'assets/france-mountain-valley.jpg',
-      'assets/france-mountain.jpg',
-      'assets/france-mountainflowers.jpg',
-      'assets/france-snow.jpg',
-      'assets/france-spotted-snow.jpg',
-      'assets/france-sunny-mountain.jpg',
-      'assets/france-train-station.jpg',
-      'assets/france-waterplants.jpg',
-      'assets/IMG_8660.jpg',
-      'assets/IMG_9951.jpg',
-      'assets/italy-grass.jpg',
-      'assets/la-birds.jpg',
-      'assets/lisbon-beach.jpg',
-      'assets/lisbon-blue-building.jpg',
-      'assets/lisbon-building.jpg',
-      'assets/lisbon-clothes.jpg',
-      'assets/lisbon-dark.JPG',
-      'assets/lisbon-leg.JPG',
-      'assets/lisbon-trees.jpg',
-      'assets/lisbon-hand.JPG',
-      'assets/newyork-grass.JPG',
-      'assets/ny-atm.JPG',
-      'assets/ny-flower-pot.JPG',
-      'assets/ny-flower-snow.jpg',
-      'assets/ny-flowers.jpg',
-      'assets/ny-grass-snow.jpg',
-      'assets/paris-building.jpg',
-      'assets/paris-eiffel.jpg',
-      'assets/paris-flowers.jpg',
-      'assets/paris-locks.jpg',
-      'assets/paris-looming-building.JPG',
-      'assets/paris-skyline.jpg',
-      'assets/paris-street-flowers.jpg',
-      'assets/paris-wall.jpg',
-      /* 'assets/.jpg', */
-      /* 'assets/.jpg', */
+      'assets/blurryPPL.jpg',
+      'assets/cgiCity.jpg',
+      'assets/cgiForest.jpg',
+      'assets/cropCircle.jpg',
+      'assets/disCity2.jpg',
+      'assets/disCity3.jpg',
+      'assets/disCity4.jpg',
+      'assets/disCity5.jpg',
+      'assets/disCity6.jpg',
+      'assets/foggyPeople.jpg',
+      'assets/moth.jpg',
+      'assets/nature.jpg',
+      'assets/person.jpg',
+      'assets/sittingWhere.jpg',
+      'assets/shaddow.jpg',
+      'assets/personWater.jpg'
     ];
+
     let currentImageIndex = 0;
-    let grainIntensity = 0; // Intensity of the grain effect
-    let isTransitioning = false; // Flag to check if transitioning
 
     function changeImages() {
       grainOverlay.classList.add('grain-active'); // Add grain effect
